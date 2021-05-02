@@ -1,0 +1,143 @@
+footer {
+    padding: 5% 2%;
+
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    background-color: var(--background-color-footer);
+
+    flex-wrap: wrap;
+
+}
+
+footer .bloco  {
+    width: 46rem;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+footer .bloco h2 {
+    font-size: 2rem;
+    font-weight: 700;
+
+    color: var(--text-ligth);
+
+}
+
+footer .bloco .icone {
+    margin: 1%;
+
+    width: 7%;
+    height: auto;
+
+    background-color: var(--background-color-button);
+
+    border-radius: 50%;
+
+    transition: background-color, .3s ease-in-out;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+footer .bloco .icone:hover {
+    background-color: var(--background-color-button-hover);
+
+}
+
+footer .bloco .icone a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    width: 100%;
+    height: auto;
+
+}
+
+footer .bloco .icone a svg {
+    padding: 10%;
+
+    width: 80%;
+    height: 7vh;
+
+    color: var(--text-ligth);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.copyright {
+    padding: 1%;
+
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--background-color-footer);
+
+    color: var(--text-ligth);
+
+    border-top: 1px solid var(--border-gray);
+
+}
+
+.copyright strong {
+    margin-left: 0.8%;
+}
+
+@media(max-width: 600px){
+    footer .bloco .icone a svg {
+        padding: 10%;
+    
+        width: 70%;
+        height: 6.5vh;
+    
+        color: var(--text-ligth);
+    
+    }
+
+}
+
+@media(max-width: 500px){
+    footer .bloco .icone a svg {
+        padding: 10%;
+    
+        width: 70%;
+        height: 5.5vh;
+    
+        color: var(--text-ligth);
+    
+    }
+
+}
+
+@media(max-width: 400px){
+    footer .bloco .icone a svg {
+        padding: 10%;
+    
+        width: 70%;
+        height: 4.5vh;
+    
+        color: var(--text-ligth);
+    
+    }
+
+}

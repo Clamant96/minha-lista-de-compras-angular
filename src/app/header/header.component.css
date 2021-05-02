@@ -1,0 +1,36 @@
+header {
+    width: 100%;
+    height: auto;
+
+    background-color: var(--background-color-button);
+
+}
+
+header .logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+
+    text-decoration: none;
+
+    color: var(--text-ligth);
+
+}
+
+header button {
+    padding: 0;
+    margin: 0;
+
+}
+
+header button svg {
+    color: var(--text-ligth) !important;
+
+    width: 30px;
+    height: auto;
+
+}
+
+header .navbar-collapse .nav-item .nav-link {
+    color: var(--text-ligth);
+
+}

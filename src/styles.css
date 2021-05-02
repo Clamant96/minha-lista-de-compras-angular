@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+html, body {
+    height: 100vh;
+
+    font-family: 'Vollkorn', serif !important;
+
+    background-color: var(--background-body) !important;
+
+}
+
+::-webkit-scrollbar {
+    display: none;
+
+}
+
+:root {
+    --background-body: #f1f1f1;
+    --background-icon: #191919;
+
+    --text-icon-hover: #f1f1f1;
+    --text-icon: #191919;
+    --text-ligth: #f1f1f1;
+    --text-black: #191919;
+    --text-remove: #c70000;
+
+    --background-color-button: #3bc;
+    --background-color-button-hover: rgb(40, 144, 158);
+    --background-color-footer: #191919;
+
+    --border-gray: #5e5e5e;
+    --border-ligth: #e4e4e4;
+
+}
