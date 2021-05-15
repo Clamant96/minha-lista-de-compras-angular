@@ -36,8 +36,8 @@
 
 .lista .carrinho {
     width: 100%;
-    height: auto;  
-    
+    height: auto;
+
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -51,8 +51,8 @@
     padding: 2%;
 
     width: 100%;
-    height: auto;  
-    
+    height: auto;
+
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -63,7 +63,7 @@
 
 .lista .carrinho .meusProdutos .produto {
     width: 80%;
-    height: auto; 
+    height: auto;
 
     display: flex;
     align-items: flex-start;
@@ -73,7 +73,7 @@
 
 .lista .carrinho .meusProdutos .produto img {
     width: 20%;
-    height: auto; 
+    height: auto;
 
 }
 
@@ -132,12 +132,14 @@
     font-size: 1.2rem;
     font-weight: 900;
 
-    transition: background-color, color, .3s ease-in-out;
+    transition: background-color, color, box-shadow, .3s ease-in-out;
 
 }
 
 .lista .carrinho .meusProdutos .produto .qtdProduto a:hover {
     background-color: var(--background-color-button);
+
+    box-shadow: 0px 0px 0px 0px var(--border-gray);
 
     color: var(--border-ligth);
 
