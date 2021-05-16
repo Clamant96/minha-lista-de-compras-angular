@@ -52,7 +52,7 @@
           </div>
           <div class="form-group texto">
             <label for="qtdProduto">Quantidade</label>
-            <input [(ngModel)]='novoProduto.qtdProduto' type="number" name="qtdProduto" class="form-control texto-input" id="qtdProduto" placeholder="Quantidade de Produtos">
+            <input [(ngModel)]='produtoInitical' type="number" name="qtdProduto" class="form-control texto-input" id="qtdProduto" placeholder="Quantidade de Produtos" disabled>
           </div>
           <div class="form-group texto">
             <label for="preco">Preço</label>
@@ -112,7 +112,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="botao texto" id="publicacao" (click)='postMarca()' data-dismiss="modal" >Cadastrar</button>
+            <button type="button" class="botao texto" id="publicacao" (click)='postMarca()' data-dismiss="modal" data-toggle="modal" data-target="#postProduto" >Cadastrar</button>
         </div>
       </div>
   </div>
@@ -136,7 +136,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="botao texto" id="publicacao" (click)='postCategoria()' data-dismiss="modal">Cadastrar</button>
+            <button type="button" class="botao texto" id="publicacao" (click)='postCategoria()' data-dismiss="modal" data-toggle="modal" data-target="#postProduto" >Cadastrar</button>
         </div>
       </div>
   </div>

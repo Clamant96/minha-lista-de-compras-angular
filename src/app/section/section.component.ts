@@ -21,6 +21,7 @@ export class SectionComponent implements OnInit {
   novoProduto: Produto = new Produto();
   listaDeProdutos: Produto[];
   idProduto: number;
+  produtoInitical = 1;
 
   novaMarca: Marca = new Marca();
   listaDeMarcas: Marca[];
@@ -114,14 +115,25 @@ export class SectionComponent implements OnInit {
 
   /* POSTANDO UM DETERMINADO ITEM */
   postProduto() {
+    /* ACESSAR O OBJETO USUARIO(ID), E DENTRO DELE INSERE O DADO VINDO DO ENVIROMENT */
+    this.usuario.id = this.idUsuario;
+    /* INSERE O ID DE USUARIO DENTRO DE POSTAGEM(USUARIO/AUTOR) */
+    this.novoProduto.usuarios = this.usuario;
+    /* INICIALIZA O PRODUTO COM UMA UNIDADE NO CARRINHO */
+    this.novoProduto.qtdProduto = this.produtoInitical;
+
     this.sectionService.postProduto(this.novoProduto).subscribe((resp: Produto) => {
       this.novoProduto = resp;
 
       this.novoProduto = new Produto();
 
+      this.findIdByUsuario(environment.id);
       this.findAllByProdutos();
 
     })
+
+    this.findIdByUsuario(environment.id);
+    this.findAllByProdutos();
 
   }
 
@@ -169,9 +181,54 @@ export class SectionComponent implements OnInit {
 
   /* DELETA UM DETERMINADO ITEM */
   deleteProduto(id: number) {
-    this.sectionService.deleteProduto(id).subscribe(() => {
+    this.sectionService.findByIdProduto(id).subscribe((resp: Produto) => {
+      if(resp.qtdProduto > 0) {
+          alert('Zere a quantidade de produtos!');
 
-      this.findAllByProdutos();
+      }else {
+        this.sectionService.findByIdProduto(id).subscribe((resp: Produto) => {
+          this.novoProduto = resp;
+
+          /* ACESSAR O OBJETO USUARIO(ID), E DENTRO DELE INSERE O DADO VINDO DO ENVIROMENT */
+          this.usuario.id = this.idUsuario;
+          /* INSERE O ID DE USUARIO DENTRO DE POSTAGEM(USUARIO/AUTOR) */
+          this.novoProduto.usuarios = this.usuario;
+          /* ZERA A QTD DE PRODUTOS DO DETERMIANDO PRODUTO */
+          this.novoProduto.qtdProduto = 0;
+
+          this.sectionService.putProduto(this.novoProduto).subscribe((resp: Produto) => {
+            this.novoProduto = resp;
+
+            this.novoProduto = new Produto();
+
+            this.findIdByUsuario(environment.id);
+            this.findAllByProdutos();
+
+          })
+
+          this.novoProduto = new Produto();
+
+          this.findIdByUsuario(environment.id);
+          this.findAllByProdutos();
+
+        })
+
+        this.sectionService.deleteProduto(id).subscribe(() => {
+
+          this.findAllByProdutos();
+
+          this.findIdByUsuario(environment.id);
+          this.findAllByProdutos();
+
+        })
+
+        this.findIdByUsuario(environment.id);
+        this.findAllByProdutos();
+
+        this.findIdByUsuario(environment.id);
+        this.findAllByProdutos();
+
+      }
 
     })
 
@@ -196,10 +253,14 @@ export class SectionComponent implements OnInit {
       this.sectionService.putProduto(this.novoProduto).subscribe((resp: Produto) => {
         this.novoProduto = resp;
 
+        this.novoProduto = new Produto();
+
         this.findIdByUsuario(environment.id);
         this.findAllByProdutos();
 
       })
+
+      this.novoProduto = new Produto();
 
       this.findIdByUsuario(environment.id);
       this.findAllByProdutos();
@@ -218,7 +279,7 @@ export class SectionComponent implements OnInit {
       /* INSERE O ID DE USUARIO DENTRO DE POSTAGEM(USUARIO/AUTOR) */
       this.novoProduto.usuarios = this.usuario;
 
-      if(this.novoProduto.qtdProduto >= 0){
+      if(this.novoProduto.qtdProduto > 0){
         /* RETIRA UM PRODUTO DA QTD DE PRODUTOS */
         this.novoProduto.qtdProduto = this.novoProduto.qtdProduto - 1;
 
@@ -227,10 +288,14 @@ export class SectionComponent implements OnInit {
       this.sectionService.putProduto(this.novoProduto).subscribe((resp: Produto) => {
         this.novoProduto = resp;
 
+        this.novoProduto = new Produto();
+
         this.findIdByUsuario(environment.id);
         this.findAllByProdutos();
 
       })
+
+      this.novoProduto = new Produto();
 
       this.findIdByUsuario(environment.id);
       this.findAllByProdutos();
