@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="card cadastro">
+      <h1>Cadastrar</h1>
+
+      <div id="msgErro"></div>
+      <div id="msgSucesso"></div>
+
+      <div class="label-float">
+          <input [(ngModel)]='usuario.nome' type="text" id="nome" placeholder="Nome" required>
+          <label id="labelNome" for="nome">Nome</label>
+      </div>
+
+      <div class="label-float">
+          <input (input)='confirmeSenha($event)' type="password" id="senha" placeholder="Senha" required>
+          <label id="labelSenha" for="senha">Senha</label>
+          <svg (click)='btnSenha()' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+          </svg>
+      </div>
+
+      <div class="label-float">
+          <input [(ngModel)]='usuario.senha' type="password" id="confirmasenha" placeholder="Confirme sua senha" required>
+          <label id="labelConfirmeSenha" for="confirmasenha">Confirmar Senha</label>
+          <svg (click)='btnConfirmarSenha()' id="verSenha" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+          </svg>
+      </div>
+
+      <div class="justify-center">
+          <button (click)='cadastrar()' id="cadastrar">Cadastrar</button>
+      </div>
+
+  </div>
+</div>

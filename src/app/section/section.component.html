@@ -1,6 +1,3 @@
-<!-- HEADER -->
-<app-header></app-header>
-
 <!-- SECTION -->
 <div class="lista">
     <h1>Minha Lista de Compras</h1>
@@ -8,49 +5,139 @@
         <h2>Produtos</h2>
         <h2>Subtotal</h2>
     </div>
-    <div class="carrinho">
+    <div class="carrinho" *ngFor='let produto of listaDeProdutos'>
         <div class="meusProdutos">
             <div class="produto">
-                <img src="https://d3ugyf2ht6aenh.cloudfront.net/stores/746/397/products/maca-argentina1-a86acef532d11addf315221676880019-1024-1024.jpg" alt="Maça Argentina">
+                <img src="{{produto.img}}" alt="{{produto.nome}}">
                 <div class="dados">
-                    <h3>Maça Argentina</h3>
-                    <p>R$ 19,80</p>
+                    <h3>{{produto.nome}}</h3>
+                    <p>R$ {{produto.preco}}</p>
                     <div class="qtdProduto">
-                        <a href="#">-</a>
-                        <p>1</p>
-                        <a href="#">+</a>
+                        <a (click)='retirarProdutoAoCarrinho(produto.id)' (click)='findIdByUsuario(idUsuario)' >-</a>
+                        <p>{{produto.qtdProduto}}</p>
+                        <a (click)='adicionarProdutoAoCarrinho(produto.id)' (click)='findIdByUsuario(idUsuario)' >+</a>
                     </div>
                 </div>
             </div>
             <div class="preco">
-                <p>R$ 1.105,00</p>
-                <a href="#">x</a>
+                <p>R$ {{produto.preco * produto.qtdProduto}}</p>
+                <a (click)='deleteProduto(produto.id)'>x</a>
             </div>
-        </div>
-        <div class="meusProdutos">
-            <div class="produto">
-                <img src="https://d3ugyf2ht6aenh.cloudfront.net/stores/746/397/products/maca-argentina1-a86acef532d11addf315221676880019-1024-1024.jpg" alt="Maça Argentina">
-                <div class="dados">
-                    <h3>Maça Argentina</h3>
-                    <p>R$ 19,80</p>
-                    <div class="qtdProduto">
-                        <a href="#">-</a>
-                        <p>1</p>
-                        <a href="#">+</a>
-                    </div>
-                </div>
-            </div>
-            <div class="preco">
-                <p>R$ 1.105,00</p>
-                <a href="#">x</a>
-            </div>
-        </div>
-        <div class="subtotal">
-            <h3>Subtotal: </h3>
-            <p>R$ 19,80</p>
         </div>
     </div>
+    <div class="subtotal">
+      <h3>Subtotal: </h3>
+      <p>R$ {{orcamentoUsuario}}</p>
+  </div>
 </div>
 
-<!-- FOOTER -->
-<app-footer></app-footer>
+<!-- MODAL DE PRODUTO / POST -->
+<div class="modal fade" id="postProduto" tabindex="-1" role="dialog" aria-labelledby="modalPostProduto" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title texto-bold" id="nomeProduto">Novo Produto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group texto">
+              <label for="nome">Nome</label>
+              <input [(ngModel)]='novoProduto.nome' type="text" name="nome" class="form-control texto-input" id="nome" placeholder="Nome do Produto">
+          </div>
+          <div class="form-group texto">
+            <label for="img">Imagem</label>
+            <input [(ngModel)]='novoProduto.img' type="text" name="img" class="form-control texto-input" id="img" placeholder="Imagem do Produto">
+          </div>
+          <div class="form-group texto">
+            <label for="qtdProduto">Quantidade</label>
+            <input [(ngModel)]='novoProduto.qtdProduto' type="number" name="qtdProduto" class="form-control texto-input" id="qtdProduto" placeholder="Quantidade de Produtos">
+          </div>
+          <div class="form-group texto">
+            <label for="preco">Preço</label>
+            <input [(ngModel)]='novoProduto.preco' type="number" name="preco" class="form-control texto-input" id="preco" placeholder="Preço do Produto">
+          </div>
+          <div class="form-group texto">
+            <label for="preco">Usuario</label>
+            <input [(ngModel)]='idUsuario' type="number" name="usuarios" class="form-control texto-input" id="usuarios" placeholder="Preço do Produto" disabled>
+          </div>
+          <!-- CAMPO MARCA -->
+          <div class="form-group texto">
+              <!-- O ATRIBUTO data-dismiss="modal", FAZ COM QUE O ITEM INFORMADO SEJA FINALIZADO POR COMPLETO -->
+              <label class="texto-gray" for="marca">Escolha uma marca ou <a class="texto-link" data-toggle="modal" data-target="#postMarca" data-dismiss="modal" aria-label="Close" >cadastre um novo</a>: </label>
+              <!-- POR MEIO DA ESCOLHA DO USUARIO E PELO METODO (CHANGE) E CAPITURADO O ID DA OPCAO ESCOLHIDA PELO USUARIO -->
+              <select [(ngModel)]='idMarca' class="form-control texto-input" name="marca" id="marca" (change)='findIdByMarca(idMarca)'>
+                  <!-- CRIA UM LOOP FOR PARA MOSTRAR TODAS AS OPCOES CONTIDAS DENTRO DA BADE DE DADOS DE TEMA -->
+                  <!-- TRAZ O VALOR DO ID DE CADA TEMA E DEIXA-O ARMAZENDO DENTRO DO VALUE="id" -->
+                  <option *ngFor='let marca of listaDeMarcas' value="{{marca.id}}">{{marca.nome}}</option>
+              </select>
+          </div>
+          <!-- CAMPO CATEGORIA -->
+          <div class="form-group texto">
+            <!-- O ATRIBUTO data-dismiss="modal", FAZ COM QUE O ITEM INFORMADO SEJA FINALIZADO POR COMPLETO -->
+            <label class="texto-gray" for="categoria">Escolha uma categoria ou <a class="texto-link" data-toggle="modal" data-target="#postCategoria" data-dismiss="modal" aria-label="Close" >cadastre uma nova</a>: </label>
+            <!-- POR MEIO DA ESCOLHA DO USUARIO E PELO METODO (CHANGE) E CAPITURADO O ID DA OPCAO ESCOLHIDA PELO USUARIO -->
+            <select [(ngModel)]='idCategoria' class="form-control texto-input" name="categoria" id="categoria" (change)='findIdByCategoria(idCategoria)'>
+                <!-- CRIA UM LOOP FOR PARA MOSTRAR TODAS AS OPCOES CONTIDAS DENTRO DA BADE DE DADOS DE TEMA -->
+                <!-- TRAZ O VALOR DO ID DE CADA TEMA E DEIXA-O ARMAZENDO DENTRO DO VALUE="id" -->
+                <option *ngFor='let categoria of listaDeCategorias' value="{{categoria.id}}">{{categoria.nome}}</option>
+            </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="botao texto" data-dismiss="modal">Cancelar</button>
+          <!-- CHAMA O METODO PUBLICAR() PARA REALIZAR A INSERCAO DOS DADOS NA BASE DE DADOS -->
+          <button type="button" class="botao texto" id="publicacao" (click)='postProduto()' data-dismiss="modal">Publicar</button>
+      </div>
+      </div>
+  </div>
+</div>
+
+<!-- ######################### CAMPOS DE MARCA ######################### -->
+<!-- MODAL DE MARCA / POST -->
+<div class="modal fade" id="postMarca" tabindex="-1" role="dialog" aria-labelledby="modalPostMarca" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title texto-bold" id="nomeMarca">Nova Marca</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group texto">
+                <label for="nome">Nome</label>
+                <input [(ngModel)]='novaMarca.nome' type="text" name="nome" class="form-control texto-input" id="nome" placeholder="Nome da Marca">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="botao texto" id="publicacao" (click)='postMarca()' data-dismiss="modal" >Cadastrar</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+<!-- ######################### CAMPOS DE CATEGORIA ######################### -->
+<!-- MODAL DE CATEGORIA / POST -->
+<div class="modal fade" id="postCategoria" tabindex="-1" role="dialog" aria-labelledby="modalPostCategoria" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title texto-bold" id="nomeCategoria">Nova Categoria</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group texto">
+                <label for="nome">Nome</label>
+                <input [(ngModel)]='novaCategoria.nome' type="text" name="nome" class="form-control texto-input" id="nome" placeholder="Nome da Categoria">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="botao texto" id="publicacao" (click)='postCategoria()' data-dismiss="modal">Cadastrar</button>
+        </div>
+      </div>
+  </div>
+</div>
